@@ -1,0 +1,229 @@
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <table class="semi" *ngIf="Viaje==4">
+            <tr>
+                <td rowspan="2" colspan="1">
+                </td>
+                <td class="space" *ngFor="let item of fila0; let i = index" (click)="mieleccion(0,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+                <td rowspan="2" colspan="2">
+                    <img class="wc" src="/assets/icon/wc.png">
+                </td>
+            </tr>
+            <tr>
+                <td class="space" *ngFor="let item of fila1; let i = index" (click)="mieleccion(1,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td *ngFor="let item of fila2; let i = index" class="space" colspan="13">
+                    <div class=" asiento-normal text-end me-2">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color unico' : 'unico'"
+                            (click)="mieleccion(2,i,item)">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2" colspan="1">
+                    <img class="volante" src="/assets/icon/volante.png">
+                </td>
+                <td class="space" *ngFor="let item of fila3; let i = index" (click)="mieleccion(3,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="space" *ngFor="let item of fila4; let i = index" (click)="mieleccion(4,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="deprimera" *ngIf="Viaje==3">
+            <tr>
+                <td rowspan="2" colspan="1">
+                </td>
+                <td class="space" *ngFor="let item of fila0; let i = index" (click)="mieleccion(0,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+                <td *ngIf="fila1[fila1.length-1].Asiento=='47'" rowspan="1" colspan="1">
+                </td>
+                <td rowspan="2" colspan="1">
+                    <img class="wc" src="/assets/icon/wc.png">
+                </td>
+            </tr>
+            <tr>
+                <td class="space" *ngFor="let item of fila1; let i = index" (click)="mieleccion(1,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+            </tr>
+            <tr class="pasillo">
+            </tr>
+            <tr>
+            <td rowspan="2" colspan="1">
+                    <img class="volante" src="/assets/icon/volante.png">
+                </td>
+                <td class="space" *ngFor="let item of fila2; let i = index" (click)="mieleccion(2,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="space" *ngFor="let item of fila3; let i = index" (click)="mieleccion(3,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="turismo" *ngIf="Viaje==2">
+            <tr>
+                <td rowspan="1" colspan="1"></td>
+                <td class="space" *ngFor="let item of fila0; let i = index" (click)="mieleccion(0,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+                <td rowspan="1" colspan="1">
+                </td>
+                <td rowspan="1" colspan="1">
+                    <img class="wc" src="/assets/icon/wc.png">
+                </td>
+            </tr>
+            <tr class="pasillo">
+            </tr>
+            <tr>
+                <td rowspan="2" colspan="1">
+                    <img class="volante" src="/assets/icon/volante.png">
+                </td>
+                <td class="space" *ngFor="let item of fila1; let i = index" (click)="mieleccion(1,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+                <td rowspan="2" colspan="1" style="width:20px;">
+                </td>
+                <td rowspan="2" colspan="1">
+                    <img class="wc" src="/assets/icon/wc.png">
+                </td>
+            </tr>
+            <tr>
+                <td class="space" *ngFor="let item of fila2; let i = index" (click)="mieleccion(2,i,item)">
+                    <div class="asiento-normal">
+                        <h1 [ngClass]="item.selec==true || item.ocupado==true ? 'color h1-normal' : 'h1-normal'">
+                            {{item.Asiento}}
+                        </h1>
+                        <img *ngIf="item.selec==false && item.ocupado==false" src="/assets/icon/asiento-disponible.png"
+                            class="img-normal">
+                        <img *ngIf="item.selec==true && item.ocupado==false" [src]="Empresa" class="img-normal">
+                        <img *ngIf="item.ocupado==true" src="/assets/icon/asiento-ocupado.png" class="img-normal">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-12 mt-4 indicadores">
+        <div class="row text-center align-items-center justify-content-center">
+            <div class="col-3">
+                <img src="/assets/icon/asiento-ocupado.png" class="img-view">
+                <p>Ocupado</p>
+            </div>
+            <div class="col-3">
+                <img src="/assets/icon/asiento-disponible.png" class="img-view">
+                <p>Disponible</p>
+            </div>
+            <div class="col-3">
+                <img [src]="Empresa" class="img-view">
+                <p>Seleccionado</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                <button *ngIf="bandera< cantidad && cantidad==1" class="btn btn-oro btn-lg rounded-pill"
+                    [disabled]="ultifila==undefined" (click)="siguiente()">
+                    Continuar
+                </button>
+                <button *ngIf="bandera< cantidad && cantidad>1" class="btn btn-oro btn-lg rounded-pill"
+                    [disabled]="ultifila==undefined" (click)="siguiente()">
+                    Siguiente Pasajero
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

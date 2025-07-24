@@ -1,0 +1,9 @@
+.sizetext{
+    font-size: 1.1rem;
+}
+mat-form-field, button{
+    width: 100%;
+}
+mat-card{
+    border-radius: 20px;
+}

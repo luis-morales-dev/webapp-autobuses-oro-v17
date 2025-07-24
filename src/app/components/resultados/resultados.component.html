@@ -1,0 +1,119 @@
+<app-loader></app-loader>
+<app-header></app-header>
+<header class="masterhead-resultado">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-lg-12 shadow p-4 bg-body rounded viaje-form">
+                <app-origen-destino class="mat-typography" [viajes]="true" (buscarviaje)="updateinfo($event)">
+                </app-origen-destino>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="resultados">
+    <div class="container">
+        <app-progress [style]="'width:25%'"></app-progress>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 *ngIf="viajes.length>=1" class="text-center fw bold">Viajes Disponibles {{modoviaje}}</h3>
+                <h3 *ngIf="viajes.length==0" class="text-center fw bold">Viaje no disponible. Por favor cambiar tus parámetros de búsqueda</h3>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-md-4 px-2">
+                <h4 class="text-left fw-bold">Filtros</h4>
+                <div class="row py-4">
+                    <h5 class="py-2">Servicio</h5>
+                    <div class="col-6">
+                        <div class="form-check">
+                            <mat-checkbox color="primary" [checked]="allComplete" [indeterminate]="someComplete()"
+                                (change)="setAll($event.checked)">Todos</mat-checkbox>
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-check">
+                            <mat-checkbox color="primary" [(ngModel)]="subtasks[0].completed"
+                                (ngModelChange)="updateAllComplete()">Oro</mat-checkbox>
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-check">
+                            <mat-checkbox color="primary" [(ngModel)]="subtasks[1].completed"
+                                (ngModelChange)="updateAllComplete()">Erco</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-check">
+                            <mat-checkbox color="primary" [(ngModel)]="subtasks[2].completed"
+                                (ngModelChange)="updateAllComplete()">Surianos</mat-checkbox>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row py-4">
+                    <h5 class="py-2">Ordenar</h5>
+                    <mat-radio-group aria-label="Select an option" [value]="option" [(ngModel)]="option">
+                        <mat-radio-button color="primary" value="0">Más temprano primero</mat-radio-button>
+                        <br>
+                        <mat-radio-button color="primary" value="1">Más tarde primero</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="row py-4 mx-2">
+                    <button class="w-100 btn btn-oro rounded-pill" (click)="aplicarfiltros()">Aplicar filtro</button>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card p-3 mb-3 border-0 bg-light rounded-9 shadow"
+                    *ngFor="let viaje of viajes | filtro:select | orden:orden">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="ms-2 c-details no-margin">
+                                <img [src]="viaje.EmpresaLogoURL" class="img-fluid w-25" alt="Autobuses Oro">
+                                <br>
+                                <img *ngIf="viaje.Servicio=='PLUS'" src="/assets/img/servicio-plus.png" class="img-plus"
+                                    alt="Autobuses Oro">
+                                <img *ngIf="viaje.Servicio=='PRIMERA CLASE'" src="/assets/img/servicio-primera.png"
+                                    class="img-tipo" alt="Autobuses Oro">
+                                <img *ngIf="viaje.Servicio=='SUPERTURISMO'" src="/assets/img/servicio-super.png"
+                                    class="img-tipo" alt="Autobuses Oro">
+                                <h4 *ngIf="viaje.Servicio=='SEMIDIRECTO'" class="fw-bold fst-italic mt-2">
+                                    {{viaje.Servicio}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center">
+                        <div class="col-3 ps-4">
+                            <h3 class="fw-bold no-margin">{{viaje.HoraViajePtoInt | date:'H:mm'}} h</h3>
+                            <h6 class="text-muted fst-italic">SALIDA {{viaje.OrigenNombre}}</h6>
+                        </div>
+                        <div class="col-3 text-center">
+                            <i class="fa-solid fa-bus-simple"></i>
+                            <div class="mb-3 oro-border-travel"></div>
+                        </div>
+                        <div class="col-3 ps-4">
+                            <h3 class="fw-bold no-margin">{{viaje.Horallegada | date:'H:mm'}} h</h3>
+                            <h6 class="text-muted fst-italic">LLEGADA {{viaje.DestinoNombre}}</h6>
+                        </div>
+                        <div class="col-3 text-center">
+                            <button type="button" class="btn btn-lg btn-oro rounded-pill"
+                                (click)="verasientos(viaje)">{{viaje.Precio | currency}}</button>
+                            <h6 class="text-muted fst-italic mt-1">{{viaje.NumAsientosDisponibles}} asientos disponibles</h6>
+                        </div>
+                    </div>
+
+                    <p class="small fw-bold text-muted">Tiempo de recorrido y depende de las condiciones del tráfico y/o clima</p>
+
+<!--<div class="col-12">
+                        <h6 class="fw-bold mt-1">Tiempo de recorrido aproximado y depende de las condiciones
+                            del clima y tráfico</h6>
+                    </div>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,56 @@
+<app-loader></app-loader>
+<app-header></app-header>
+<section style="margin-top: 5%;" class="venta-pago">
+    <div class="container">
+        <app-progress [style]="'width:100%'"></app-progress>
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-primary btn-oro no-margin" role="alert">
+                    <div class="row">
+                        <div class="col align-self-start">
+                            <h6 class="no-margin fw-bold">Tiempo restante:</h6>
+                        </div>
+                        <div class="col align-self-end text-end">
+                            <h6 class="no-margin fw-bold"> {{local.minutos}}: {{local.segundos}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card p-4 border-0 bg-light rounded-9 shadow">
+                <div class="col-12 p-3">
+                    <h2 class="text-center">¡GRACIAS POR SU COMPRA!</h2>
+                    <br>
+                    <div class="row">
+                        <div class="col-6 total">TOTAL DE LA COMPRA</div>
+                        <div class="col-6 text-end total">{{local.total | currency:'MXN'}}</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <br>
+                    <div class="row border-button" *ngFor="let item of pasajeros">
+                        <div class="col-6 normal">Cliente</div>
+                        <div class="col-6 text-end normal">{{item.Cliente}}</div>
+                        <div class="col-6 normal">Asiento</div>
+                        <div class="col-6 text-end normal">{{item.Asiento}}</div>
+                        <div class="col-6 normal">Folio de compra</div>
+                        <div class="col-6 text-end normal">{{item.Folio}}</div>
+                        <div class="col-6 normal">Fecha de salida</div>
+                        <div class="col-6 text-end normal">{{item.FechaSalida | date:'dd/MM/yyyy'}}</div>
+                        <div class="col-6 normal">Origen - Destino</div>
+                        <div class="col-6 text-end normal">{{item.Origen}} - {{item.Destino}}</div>
+                    </div>
+                    <br>
+                    <h3 class="text-center no-margin">¡DISFRUTE SU VIAJE!</h3>
+                    <div class="col-12 text-center total fw-bold">
+                        Descarga tus Boletos
+                        <button type="button"class="btn btn-oro rounded-pill"
+                        (click)="descargarBoletos()">AQUI</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

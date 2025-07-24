@@ -1,0 +1,8 @@
+.mitext{
+    font-size: calc(8px + .60vw);
+}
+@media only screen and (max-width:600px){
+    .mitext{
+        font-size: calc(12px + .5vw);
+    }   
+}

@@ -1,0 +1,36 @@
+mat-form-field{
+    width: 100%;
+}
+.elpadding{
+    padding-right: 50px;
+}
+.semiconta{
+    padding-left: 6%;
+    padding-right: 6%;
+}
+@media only screen and (max-width:576px){
+    .elpadding{
+        padding-right: 0px;
+    }   
+    .semiconta{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+@media only screen and (max-width:768px){
+    .elpadding{
+        padding-right: 0px;
+    }   
+    .semiconta{
+        padding-left: 7% !important;
+        padding-right: 7% !important;
+    }
+}
+.imgasiento{
+    width: 2rem;
+    height: 2rem;
+}
+.solotu{
+    margin: 0px 0px 0px 0px;
+
+}

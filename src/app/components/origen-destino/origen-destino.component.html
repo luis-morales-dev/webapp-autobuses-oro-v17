@@ -1,0 +1,65 @@
+<div>
+  <mat-tab-group [selectedIndex]="activeindex" (selectedTabChange)="tabviaje($event)">
+    <mat-tab label="Viaje Sencillo"></mat-tab>
+    <mat-tab label="Viaje Redondo"></mat-tab>
+  </mat-tab-group>
+</div>
+<form class="row gx-3 gy-2 align-items-center py-3" [formGroup]="FormViaje" (ngSubmit)="buscarCorida()">
+  <div class="col-sm-3">
+    <mat-form-field appearance="outline">
+      <mat-label>ORIGEN</mat-label>
+      <input type="text"
+             matInput
+             formControlName="origen"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="origenselec()">
+        <mat-option *ngFor="let option of origenesOptions | async" [value]="option.Nombre">
+          {{option.Nombre}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="col-sm-3">
+    <mat-form-field appearance="outline">
+      <mat-label>DESTINO</mat-label>
+      <input type="text"
+             matInput
+             formControlName="destino"
+             [matAutocomplete]="auto2">
+      <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" (optionSelected)="destinoselec()">
+        <mat-option *ngFor="let option of destinosOptions | async" [value]="option.Nombre">
+          {{option.Nombre}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="col-sm-2">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de salida</mat-label>
+      <input matInput [matDatepicker]="fsalida" [min]="date" [max]="fecha_final" autocomplete="off" formControlName="fechasalida"
+        (dateChange)="selecfechaSalida()" (click)="fsalida.open()">
+      <mat-datepicker-toggle matSuffix [for]="fsalida"></mat-datepicker-toggle>
+      <mat-datepicker #fsalida disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div *ngIf="activeLink== 'Viaje Redondo'" class="col-sm-2">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de regreso</mat-label>
+      <input matInput [matDatepicker]="dp3" autocomplete="off" formControlName="fecharegreso" (click)="dp3.open()"
+        [min]="minimo" [max]="fecha_final">
+      <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+      <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-sm-2">
+    <mat-form-field appearance="outline">
+      <mat-label>Pasajeros</mat-label>
+      <input class="sizetext" matInput autocomplete="off" type="number" formControlName="Npasajeros" min="1" max="10">
+    </mat-form-field>
+  </div>
+  <div class="col-sm-2">
+    <button type="submit" class="btn btn-lg rounded-pill btn-oro"
+      [disabled]="this.FormViaje.invalid ||FormViaje.dirty==false">
+      Buscar viaje</button>
+  </div>
+</form>

@@ -1,0 +1,42 @@
+<mat-dialog-content class="mat-typography">
+    <div class="alert alert-primary btn-oro" role="alert"></div>
+    <h2 class="text-center">¡GRACIAS POR SU COMPRA!</h2>
+    <br>
+    <div class="row">
+        <div class="col-6 total">TOTAL DE LA COMPRA</div>
+        <div class="col-6 text-end total">{{data.total| currency:'MXN'}}</div>
+    </div>
+    <br>
+    <div class="row border-button" *ngFor="let item of data.pasajeros">
+        <div class="col-6 normal">Cliente</div>
+        <div class="col-6 text-end normal">{{item.Cliente}}</div>
+        <div class="col-6 normal">Asiento</div>
+        <div class="col-6 text-end normal">{{item.Asiento}}</div>
+        <div class="col-6 normal">Folio de compra</div>
+        <div class="col-6 text-end normal">{{item.Folio}}</div>
+        <div class="col-6 normal">Fecha de salida</div>
+        <div class="col-6 text-end normal">{{item.FechaSalida | date:'dd/MM/yyyy'}}</div>
+        <div class="col-6 normal">Origen - Destino</div>
+        <div class="col-6 text-end normal">{{item.Origen}} - {{item.Destino}}</div>
+    </div>
+    <br>
+    <h3 class="text-center no-margin">¡DISFRUTE SU VIAJE!</h3>
+    <div class="col-12 text-center total fw-bold">
+        Descarga tus Boletos <button type="button" [mat-dialog-close]="true" class="btn btn-oro rounded-pill">AQUI</button>
+    </div>
+</mat-dialog-content>
+<div class="alert alert-primary btn-oro no-margin mat-typography" role="alert">
+    <div class="row">
+        <div class="col-6 d-flex align-items-center justify-content-center">
+            <img src="/assets/img/logo_oro.png" width="35%">
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12 dudas text-center p-1">¿Dudas?</div>
+                <div class="col-12"> <img src="/assets/icon/tel.png" width="20px"> 222 249 7177 </div>
+                <div class="col-12"> <img src="/assets/icon/whatsapp.png" width="20px"> 22 24 50 66 05</div>
+                <div class="col-12"> <img src="/assets/icon/email.png" width="20px"> atencion_clientes&#64;grupo-oro.com.mx</div>
+            </div>
+        </div>
+    </div>
+</div>

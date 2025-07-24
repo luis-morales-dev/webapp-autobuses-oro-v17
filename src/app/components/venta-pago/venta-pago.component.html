@@ -1,0 +1,172 @@
+<app-loader></app-loader>
+<app-header></app-header>
+<section style="margin-top: 5%;" class="venta-pago">
+    <div class="container">
+        <app-progress [style]="'width:75%'"></app-progress>
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-primary btn-oro no-margin" role="alert">
+                    <div class="row">
+                        <div class="col align-self-start">
+                            <h6 class="no-margin fw-bold">Tiempo restante:</h6>
+                        </div>
+                        <div class="col align-self-end text-end">
+                            <h6 class="no-margin fw-bold"> {{local.minutos}}: {{local.segundos}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="fw-bold mt-2">
+                    RESUMEN
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 masgrid">
+                <div class="card p-3 border-0 bg-light rounded-9 shadow">
+                    <div class="row">
+                        <h5 class="fw-bold no-margin">
+                            Viaje (Ida)
+                        </h5>
+                        <div class="row no-margin no-padding d-flex align-items-center">
+                            <div class="col-6 ps-4 mb-3">
+                                <picture>
+                                    <img [src]="local.miviajeida.EmpresaLogoURL" alt="" width="50%">
+                                </picture>
+                            </div>
+                            <div class="col-6 ps-4 mb-2">
+                                <br>
+                                <img *ngIf="local.miviajeida.Servicio=='PLUS'" src="/assets/img/servicio-plus.png"
+                                    class="img-plus-v" alt="Autobuses Oro">
+                                <img *ngIf="local.miviajeida.Servicio=='PRIMERA CLASE'"
+                                    src="/assets/img/servicio-primera.png" class="img-tipo-v" alt="Autobuses Oro">
+                                <img *ngIf="local.miviajeida.Servicio=='SUPERTURISMO'"
+                                    src="/assets/img/servicio-super.png" class="img-tipo-v" alt="Autobuses Oro">
+                                <h4 *ngIf="local.miviajeida.Servicio=='SEMIDIRECTO'" class="fw-bold fst-italic mt-2">
+                                    {{local.miviajeida.Servicio}}</h4>
+                                <h6 class="fw-bold"> Fecha: {{local.miviajeida.FechaViaje}}</h6>
+                            </div>
+                            <div class="col-4 ps-4">
+                                <h5 class="fw-bold">{{local.miviajeida.HoraViajePtoInt| date:'H:mm'}}</h5>
+                                <h6 class="small text-muted fst-italic">Origen: {{local.miviajeida.OrigenNombre}}
+                                </h6>
+                            </div>
+                            <div class="col-4 text-center">
+                                <i class="fa-solid fa-bus-simple"></i>
+                                <div class="mb-3 oro-border-travel"></div>
+                            </div>
+                            <div class="col-4 ps-4">
+                                <h5 class="fw-bold">{{local.miviajeida.Horallegada| date:'H:mm'}}</h5>
+                                <h6 class="small text-muted fst-italic">Destino: {{local.miviajeida.DestinoNombre}}
+                                </h6>
+                            </div>
+                        </div>
+                        <hr *ngIf="local.tipoviaje=='Viaje Redondo'">
+                        <div *ngIf="local.tipoviaje=='Viaje Redondo'"
+                            class="row no-margin no-padding d-flex align-items-center">
+                            <h5 class="fw-bold no-margin">
+                                Viaje (Regreso)
+                            </h5>
+                            <div class="col-6 ps-4 mb-3">
+                                <picture>
+                                    <img [src]="local.miviajevuelta.EmpresaLogoURL" alt="" width="50%">
+                                </picture>
+                            </div>
+                            <div class="col-6 ps-4 mb-2">
+                                <br>
+                                <img *ngIf="local.miviajevuelta.Servicio=='PLUS'" src="/assets/img/servicio-plus.png"
+                                    class="img-plus-v" alt="Autobuses Oro">
+                                <img *ngIf="local.miviajevuelta.Servicio=='PRIMERA CLASE'"
+                                    src="/assets/img/servicio-primera.png" class="img-tipo-v" alt="Autobuses Oro">
+                                <img *ngIf="local.miviajevuelta.Servicio=='SUPERTURISMO'"
+                                    src="/assets/img/servicio-super.png" class="img-tipo-v" alt="Autobuses Oro">
+                                <h4 *ngIf="local.miviajevuelta.Servicio=='SEMIDIRECTO'" class="fw-bold fst-italic mt-2">
+                                    {{local.miviajevuelta.Servicio}}</h4>
+                                <h6 class="fw-bold"> Fecha: {{local.miviajevuelta.FechaViaje}}</h6>
+                            </div>
+                            <div class="col-4 ps-4">
+                                <h5 class="fw-bold">{{local.miviajevuelta.HoraViajePtoInt| date:'H:mm'}}</h5>
+                                <h6 class="small text-muted fst-italic">Origen: {{local.miviajevuelta.OrigenNombre}}
+                                </h6>
+                            </div>
+                            <div class="col-4 text-center">
+                                <i class="fa-solid fa-bus-simple"></i>
+                                <div class="mb-3 oro-border-travel"></div>
+                            </div>
+                            <div class="col-4 ps-4">
+                                <h5 class="fw-bold">{{local.miviajevuelta.Horallegada| date:'H:mm'}}</h5>
+                                <h6 class="small text-muted fst-italic">Destino: {{local.miviajevuelta.DestinoNombre}}
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 masgrid">
+                <div class="card p-3 border-0 bg-light rounded-9 shadow">
+                    <div class="col-12">
+                        <h5 class="fw-bold">Pasajeros: {{local.pasajeros.length}} (Ida)</h5>
+                    </div>
+                    <div class="no-margin d-flex mb-2" *ngFor="let pasaje of local.pasajeros">
+                        <div class="col-6">{{pasaje['ClienteNombre']}} {{pasaje['Apellido']}}</div>
+                        <div class="col-3 text-center no-padding">No. Asiento: {{pasaje['Asiento']}}</div>
+                        <div class="col-3 text-end">{{pasaje['Precio'] | currency}}</div>
+                    </div>
+                    <hr *ngIf="local.tipoviaje=='Viaje Redondo'">
+                    <div *ngIf="local.tipoviaje=='Viaje Redondo'" class="col-12">
+                        <h5 class="fw-bold">Pasajeros: {{local.pasajerosregreso.length}} (Regreso)</h5>
+                    </div>
+                    <div *ngIf="local.tipoviaje=='Viaje Redondo'" class="row">
+                        <div class="no-margin d-flex mb-2" *ngFor="let pasaje of local.pasajerosregreso">
+                            <div class="col-6">{{pasaje['ClienteNombre']}} {{pasaje['Apellido']}}</div>
+                            <div class="col-3 text-center no-padding">No. Asiento: {{pasaje['Asiento']}}</div>
+                            <div class="col-3 text-end">{{pasaje['Precio'] | currency}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 masgrid">
+                <div class="card p-3 border-0 bg-light rounded-9 shadow">
+                    <div class="col-12">
+                        Le recomendamos llegar, al menos 30 minutos antes del horario marcado en el boleto
+                    </div>
+                    <form class="row">
+                        <div class="col-12 fw-bold mt-2">
+                           * Ingresa el Correo Electrónico donde se envían los boleto(s)
+                        </div>
+                        <div class="col-12">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Correo Electrónico</mat-label>
+                                <input matInput name="email" type="email" [formControl]="emailFormControl"
+                                    [errorStateMatcher]="matcher" id="email">
+                                <mat-error
+                                    *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Correo Invalido</mat-error>
+                                <mat-error *ngIf="emailFormControl.hasError('required')">Email is
+                                    <strong>Requerido</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-2 text-center"><mat-checkbox [formControl]="checterminos" color="primary" class="example-margin"></mat-checkbox>
+                                </div>
+                                <div class="col-10"><a href="https://www.autobusesoro.com.mx/aviso-de-privacidad"
+                                        target="_blank">Acepto los Terminos y Condiciones</a></div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <h5 class="fw-bold"> Total</h5>
+                        </div>
+                        <div class="col-6 text-end">
+                            <h5 class="fw-bold"> {{total | currency}}</h5>
+                        </div>
+                        <button class="btn btn-lg mt-2 rounded-pill btn-oro"
+                            [disabled]="banderfin || emailFormControl.invalid || checterminos.value==false" (click)="enviarventa('99')">Pagar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

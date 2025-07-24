@@ -1,0 +1,17 @@
+.total{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.border-button{
+    border-bottom: 2px;
+    border-bottom-style: solid;
+}
+.normal{
+    margin-top: 1px;
+    font-size: 1rem;
+    font-weight: bold;  
+}
+.dudas{
+    background-color: lightgray;
+    border-radius: 10px;
+}
