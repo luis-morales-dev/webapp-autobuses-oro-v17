@@ -1,14 +1,16 @@
-import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { SocketService } from './../../services/socket.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { DOCUMENT, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { BoletosService } from '../../services/boletos.service';
-import { PasarelaService } from '../../services/pasarela.service';
 import { LocalService } from '../../services/local.service';
 import { PoperrorComponent } from '../poperror/poperror.component';
 import { environment } from '../../../environments/environment';
+import { ModalPagoComponent } from '../modal-pago/modal-pago.component';
+import { RestStatusPago } from 'src/app/interfaces/intstripe';
 
 declare var PaymentCheckout: any;
 const key_code = environment.client_app_code;
@@ -27,7 +29,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './venta-pago.component.html',
   styleUrls: ['./venta-pago.component.css']
 })
-export class VentaPagoComponent implements OnInit {
+export class VentaPagoComponent implements OnInit, OnDestroy {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   checterminos = new FormControl(false, [Validators.required]);
   matcher = new MyErrorStateMatcher();
@@ -35,23 +37,20 @@ export class VentaPagoComponent implements OnInit {
   banderfin: boolean = false;
   bandera: boolean = true;
   total: number = 0;
-  modalpago: any;
-
-
+  liga_pago: string = '';
 
   constructor(public local: LocalService,
     private boletos: BoletosService,
     public dialog: MatDialog,
-    private pasarela: PasarelaService,
-    @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2,
+    private socketService: SocketService,
     private router: Router) { }
 
   async ngOnInit(): Promise<void> {
-    let proce= localStorage.getItem('proceso');
+    let proce = localStorage.getItem('proceso');
     let ultimo = localStorage.getItem('ultiproceso');
     if (proce == '4' || proce != '3' || ultimo != '2') {
       this.local.redirigir();
+      return;
     }
     scroll(0, 0);
     this.local.pasajeros.forEach((item) => {
@@ -63,17 +62,40 @@ export class VentaPagoComponent implements OnInit {
       });
 
     }
-    window.addEventListener('beforeunload', (event) => {
-      if (this.bandera) {
-        localStorage.setItem('proceso', '4');
-        localStorage.setItem('ultiproceso', '4');
-        event.preventDefault();
-        event.returnValue = '';
+    window.addEventListener('beforeunload', this.beforeUnloadHandler);
+    this.initializeSocket();
+  }
+  private beforeUnloadHandler = (event: BeforeUnloadEvent) => {
+    if (this.bandera) {
+      localStorage.setItem('proceso', '4');
+      localStorage.setItem('ultiproceso', '4');
+      event.preventDefault();
+      event.returnValue = '';
+    }
+  };
+  private initializeSocket(): void {
+    this.socketService.connect().subscribe({
+      next: (message) => {
+        message = JSON.parse(message);
+        if (message['action'] == 'payment_update' && message['payment_reference'] == this.local.IdTransaccion) {
+          this.dialog.closeAll();
+          this.saveresponsehsbc(message['data']);
+        }
+      },
+      error: (error) => {
+        console.error('Error en WebSocket:', error);
+      },
+      complete: () => {
+        console.log('Conexión WebSocket cerrada');
       }
     });
   }
   async enviarventa(tipocard: any) {
     this.banderfin = true;
+    if (!this.socketService.isConnected()) {
+      this.modalerror();
+      return;
+    }
     if (this.local.fecha_99 != '') {
       this.opencheckout();
       return;
@@ -141,60 +163,66 @@ export class VentaPagoComponent implements OnInit {
     });
   }
   opencheckout() {
-    this.pasarela.init(this.renderer, this.document).then(async () => {
-      this.modalpago = await new PaymentCheckout.modal({
-        client_app_code: key_code,
-        client_app_key: key_app,
-        locale: 'es',
-        //env_mode: 'stg',
-        env_mode: 'prod',
-        onOpen: () => {
-          this.banderfin = true;
-        },
-        onClose: () => {
-          this.banderfin = false;
-        },
-        onResponse: (response: any) => {
-          this.saveresponsehsbc(response);
-        }
-      });
-      await this.modalpago.open({
-        user_id: this.local.IdTransaccion,
-        user_email: this.emailFormControl.value,
-        order_description: 'Venta de Boleto(s) Oro',
-        order_amount: Number(this.total.toFixed(2)),
-        order_vat: 0,
-        order_reference: this.local.IdTransaccion,
-      });
-    }).catch((error) => {
-      this.poperror('Estamos teniendo problemas para procesar el pago');
-    });
-  }
-  async saveresponsehsbc(response: any) {
-     await this.modalpago.close();
+    if (this.liga_pago) {
+      this.abrirModal(this.liga_pago);
+      return;
+    }
     this.local.show();
-    this.boletos.saveresponsehsbc(response).subscribe({
-      next: () => {
-        if (response['error']) {
-          this.poperror(response['error']['description']);
-          return;
+    this.boletos.generarligapago({
+      IdTransaccion: this.local.IdTransaccion,
+      total: this.total,
+      email: this.emailFormControl.value || ''
+    }).subscribe({
+      next: (resp) => {
+        this.local.hide();
+        if (resp.code === 202) {
+          this.liga_pago = resp.url_pago;
+          this.socketService.sendMessage({
+            action: 'subscribe',
+            payment_reference: this.local.IdTransaccion,
+            timestamp: new Date().toISOString()
+          });
+          this.abrirModal(resp.url_pago);
         }
-        if (response['transaction']) {
-          if (response['transaction']['status_detail'] == 3 && response['transaction']['status'] == 'success' && response['transaction']['current_status'] == 'APPROVED') {
-            let tipo = response['transaction']['payment_method_type'] == 0 ? '04' : '28';
-            this.confirmartransaccion(tipo);
-          } else {
-            this.poperror(response['transaction']['message']);
-          }
-        }
-
-      }, error: () => {
-
+      },
+      error: () => {
+        this.local.hide();
       }
     });
   }
+  abrirModal(url: string): void {
+    const dialogRef = this.dialog.open(ModalPagoComponent, {
+      width: '600px',
+      height: '700px',
+      maxWidth: '95vw',
+      maxHeight: '95vh',
+      panelClass: 'responsive-modal',
+      data: { url: url }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.banderfin = false;
+    });
+  }
+  async saveresponsehsbc(response: RestStatusPago) {
+    if (response.status == 'denied') {
+      this.liga_pago = '';
+      this.poperror(response.message || 'Transacción no aprobada por el banco emisor.');
+
+      return;
+    }
+    if (response.status == 'error') {
+      this.modalerror();
+      return;
+    }
+    if (response.status == 'approved') {
+      this.bandera = false;
+      this.confirmartransaccion(response.card_type_code);
+    } else {
+      this.modalerror();
+    }
+  }
   async confirmartransaccion(tipo: string) {
-    // await this.local.show();
+    await this.local.show();
     this.boletos.confirmartransaccion('COM', [{
       IdTransaccion: this.local.IdTransaccion,
       Partida: 1,
@@ -205,8 +233,8 @@ export class VentaPagoComponent implements OnInit {
       next: (resp) => {
         this.local.hide();
         if (resp.SDTVentasPagosRespuesta.Success) {
-          this.local.total= this.total;
-          this.local.email_cliente = this.emailFormControl.value||'';
+          this.local.total = this.total;
+          this.local.email_cliente = this.emailFormControl.value || '';
           this.router.navigate(['/descarga-boleto']);
         } else {
           this.modalerror();
@@ -223,10 +251,9 @@ export class VentaPagoComponent implements OnInit {
       data: { message: 'Error al intentar confirmar la venta de asientos, no es posible completar la operación.' },
     });
     dialog.afterClosed().subscribe(async (resp) => {
-      this.router.navigateByUrl('/');
-      setTimeout(() => {
-        location.reload();
-      }, 2000);
+      this.router.navigateByUrl('/').then(() => {
+        window.location.reload();
+      });
     });
   }
   poperror(msj: string) {
@@ -235,8 +262,15 @@ export class VentaPagoComponent implements OnInit {
       data: { message: msj },
     });
   }
+  private removeBeforeUnloadListener(): void {
+    window.removeEventListener('beforeunload', this.beforeUnloadHandler);
+  }
+
   ngOnDestroy() {
-    localStorage.setItem('proceso', '4');
-    localStorage.setItem('ultiproceso', '3');
+    this.removeBeforeUnloadListener(); // Limpiar al destruir el componente
+    this.socketService.disconnect();
+    this.dialog.closeAll();
+    //localStorage.setItem('proceso', '4');
+    //localStorage.setItem('ultiproceso', '3');
   }
 }

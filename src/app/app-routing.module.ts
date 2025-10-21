@@ -18,7 +18,7 @@ import { AvisoDePrivacidadProveedoresComponent } from './components/aviso-de-pri
 import { VacantesComponent } from './components/vacantes/vacantes.component';
 import { RecorreCuernavacaComponent } from './components/blog/recorre-cuernavaca/recorre-cuernavaca.component';
 import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
-import {DwTicketComponent} from './components/dw-ticket/dw-ticket.component';
+import { DwTicketComponent } from './components/dw-ticket/dw-ticket.component';
 //import { InicioCertificacionComponent } from './components/inicio-certificacion/inicio-certificacion.component';
 import { ValidaGuard } from './guards/valida.guard';
 
@@ -26,25 +26,25 @@ import { ValidaGuard } from './guards/valida.guard';
 
 
 const routes: Routes = [
-  {path:'',           component: HomeComponent, canActivate:[ValidaGuard]},
-  {path:'resultados', component: ResultadosComponent, canActivate:[ValidaGuard]},
-  {path:'seleccionar-asientos', component: SeleccionarAsientosComponent},
-  {path:'asientos-regreso', component:AsientosRegresoComponent },
-  {path:'responsabilidad-social', component: ResponsabilidadSocialComponent, canActivate:[ValidaGuard]},
-  {path:'terminales', component: TerminalesComponent, canActivate:[ValidaGuard]},
-  {path:'mas-servicios', component: MasServiciosComponent, canActivate:[ValidaGuard]},
-  {path:'contacto', component:ContactoComponent, canActivate:[ValidaGuard]},
-  {path:'quienes-somos', component: QuienesSomosComponent, canActivate:[ValidaGuard]},
-  {path:'preguntas-frecuentes', component:PreguntasFrecuentesComponent, canActivate:[ValidaGuard]},
-  {path:'politicas', component:PoliticasComponent, canActivate:[ValidaGuard]},
-  {path:'facturacion', component:FacturacionComponent, canActivate:[ValidaGuard]},
-  {path:'aviso-de-privacidad', component:AvisoDePrivacidadComponent, canActivate:[ValidaGuard]},
-  {path:'aviso-de-privacidad-proveedores', component:AvisoDePrivacidadProveedoresComponent, canActivate:[ValidaGuard]},
-  {path:'vacantes', component:VacantesComponent, canActivate:[ValidaGuard]},
-  {path:'blog/recorre-cuernavaca', component:RecorreCuernavacaComponent, canActivate:[ValidaGuard]},
-  {path:'terminos-condiciones', component:TerminosCondicionesComponent, canActivate:[ValidaGuard]},
-  {path:'venta-pago', component:VentaPagoComponent},
-  {path:'descarga-boleto', component:DwTicketComponent},
+  { path: '', component: HomeComponent, canActivate: [ValidaGuard] },
+  { path: 'resultados', component: ResultadosComponent, canActivate: [ValidaGuard] },
+  { path: 'seleccionar-asientos', component: SeleccionarAsientosComponent },
+  { path: 'asientos-regreso', component: AsientosRegresoComponent },
+  { path: 'responsabilidad-social', component: ResponsabilidadSocialComponent, canActivate: [ValidaGuard] },
+  { path: 'terminales', component: TerminalesComponent, canActivate: [ValidaGuard] },
+  { path: 'mas-servicios', component: MasServiciosComponent, canActivate: [ValidaGuard] },
+  { path: 'contacto', component: ContactoComponent, canActivate: [ValidaGuard] },
+  { path: 'quienes-somos', component: QuienesSomosComponent, canActivate: [ValidaGuard] },
+  { path: 'preguntas-frecuentes', component: PreguntasFrecuentesComponent, canActivate: [ValidaGuard] },
+  { path: 'politicas', component: PoliticasComponent, canActivate: [ValidaGuard] },
+  { path: 'facturacion', component: FacturacionComponent, canActivate: [ValidaGuard] },
+  { path: 'aviso-de-privacidad', component: AvisoDePrivacidadComponent, canActivate: [ValidaGuard] },
+  { path: 'aviso-de-privacidad-proveedores', component: AvisoDePrivacidadProveedoresComponent, canActivate: [ValidaGuard] },
+  { path: 'vacantes', component: VacantesComponent, canActivate: [ValidaGuard] },
+  { path: 'blog/recorre-cuernavaca', component: RecorreCuernavacaComponent, canActivate: [ValidaGuard] },
+  { path: 'terminos-condiciones', component: TerminosCondicionesComponent, canActivate: [ValidaGuard] },
+  { path: 'venta-pago', component: VentaPagoComponent },
+  { path: 'descarga-boleto', component: DwTicketComponent },
   //{path:'inicio-certificacion', component:InicioCertificacionComponent},
 ];
 

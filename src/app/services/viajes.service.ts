@@ -4,8 +4,8 @@ import { environment } from '../../environments/environment';
 import { RestPago } from '../interfaces/intstripe';
 import { RestPrecioViaje, RestViajes } from '../interfaces/Viajes';
 
-const url= environment.url;
-const apikey= environment.apikey;
+const url = environment.url;
+const apikey = environment.apikey;
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class ViajesService {
 
   constructor(private http: HttpClient) { }
 
-  getViajes(Empresa: number,Origen: string,Destino: string,FechaViaje: any){
-    const data ={
+  getViajes(Empresa: number, Origen: string, Destino: string, FechaViaje: any) {
+    const data = {
       ApiKey: apikey,
       Empresa,
       Origen,
@@ -23,27 +23,23 @@ export class ViajesService {
       FechaViaje,
       Tipo: "CR"
     }
-   // console.log('para recibir viajes disponiobles',data);
-    
-    return this.http.post<RestViajes>(`${url}get-lista-viajes-ws`,data);
+    return this.http.post<RestViajes>(`${url}get-lista-viajes-ws`, data);
   }
-  getPreciosViaje(Viaje: string,Origen: string,Destino: string,FechaSalida: string){
+  getPreciosViaje(Viaje: string, Origen: string, Destino: string, FechaSalida: string) {
     // http://api-oro.lerco.agency/web/api/get-precios-viaje-ws
-    const data= {   
-      ApiKey:apikey,
+    const data = {
+      ApiKey: apikey,
       Viaje,
       Origen,
       Destino,
       FechaSalida
     };
-   // console.log('para recibir precios del viaje seleccionado', data);
-    
-    return this.http.post<RestPrecioViaje>(`${url}get-precios-viaje-ws`,data);
+
+    return this.http.post<RestPrecioViaje>(`${url}get-precios-viaje-ws`, data);
   }
-  
-  realizarPago(token_card: string,total: number){
+
+  realizarPago(token_card: string, total: number) {
     // http://api-oro.lerco.agency/web/api/post-stripe-pago
-    
-    return this.http.post<RestPago>(`${url}post-stripe-pago`,{token_card, total});
+    return this.http.post<RestPago>(`${url}post-stripe-pago`, { token_card, total });
   }
 }

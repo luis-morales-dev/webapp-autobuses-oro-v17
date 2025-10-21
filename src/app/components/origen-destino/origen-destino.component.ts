@@ -13,21 +13,21 @@ import { startWith } from 'rxjs/operators';
   templateUrl: './origen-destino.component.html',
   styleUrls: ['./origen-destino.component.css'],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
+    { provide: MAT_DATE_LOCALE, useValue: 'es-MX' },
   ],
 })
 export class OrigenDestinoComponent implements OnInit {
-  @Input() viajes: boolean= false;
+  @Input() viajes: boolean = false;
   @Output() buscarviaje = new EventEmitter<FormGroup>();
-  date: Date= new Date();
-  minimo:Date= new Date();
-  fecha_final:Date = new Date('2025-09-01');
+  date: Date = new Date();
+  minimo: Date = new Date();
+  fecha_final: Date = new Date('2025-11-01');
   elemento2: any;
-  activeLink: string='Viaje Sencillo';
+  activeLink: string = 'Viaje Sencillo';
   activeindex: number = 0;
-  origenes:Origen[] = [];
-  destinos:Destino[] = [];
-  FormViaje: FormGroup=  new FormGroup({
+  origenes: Origen[] = [];
+  destinos: Destino[] = [];
+  FormViaje: FormGroup = new FormGroup({
     origen: new FormControl(' '),
     origencodigo: new FormControl(''),
     destinocodigo: new FormControl(''),
@@ -40,22 +40,22 @@ export class OrigenDestinoComponent implements OnInit {
   destinosOptions: Observable<Destino[]> = new Observable();
 
   constructor(private _adapter: DateAdapter<any>,
-              @Inject(MAT_DATE_LOCALE) private _locale: string,
-              private fb: FormBuilder,
-              private local: LocalService,
-              private post: PostService) {
+    @Inject(MAT_DATE_LOCALE) private _locale: string,
+    private fb: FormBuilder,
+    private local: LocalService,
+    private post: PostService) {
     this._adapter.setLocale(this._locale);
     this.cargarformulario();
-   }
+  }
   cargarformulario() {
     this.FormViaje = this.fb.group({
-      origen:[' ', Validators.required],
-      origencodigo:['', Validators.required],
-      destino:[' ',Validators.required],
-      destinocodigo:['',Validators.required],
-      fechasalida:['',Validators.required],
-      fecharegreso:['', Validators.nullValidator],
-      Npasajeros:[1, Validators.required]
+      origen: [' ', Validators.required],
+      origencodigo: ['', Validators.required],
+      destino: [' ', Validators.required],
+      destinocodigo: ['', Validators.required],
+      fechasalida: ['', Validators.required],
+      fecharegreso: ['', Validators.nullValidator],
+      Npasajeros: [1, Validators.required]
     });
   }
 
@@ -70,22 +70,22 @@ export class OrigenDestinoComponent implements OnInit {
       map(value => this._filter2(value || '')),
     );
     this._adapter.setLocale(this._locale);
-     // this.elemento2 = document.getElementById('btn-refres');
-    if(this.viajes==false){
+    // this.elemento2 = document.getElementById('btn-refres');
+    if (this.viajes == false) {
       await this.local.show();
-    }else{
-      this.activeindex =this.local.tipoviaje  == 'Viaje Redondo' ? 1 : 0;
-      this.activeLink =this.local.tipoviaje;
+    } else {
+      this.activeindex = this.local.tipoviaje == 'Viaje Redondo' ? 1 : 0;
+      this.activeLink = this.local.tipoviaje;
     }
     this.cargarorigenes();
   }
-  tabviaje(event: any){
+  tabviaje(event: any) {
     let link = event['tab']['textLabel'];
     this.activeLink = link;
-    if(link=='Viaje Redondo'){
+    if (link == 'Viaje Redondo') {
       this.FormViaje.controls['fecharegreso'].setValidators([Validators.required]);
       this.FormViaje.controls['fecharegreso'].updateValueAndValidity();
-    }else{
+    } else {
       this.FormViaje.controls['fecharegreso'].setValidators([Validators.nullValidator]);
       this.FormViaje.controls['fecharegreso'].updateValueAndValidity();
     }
@@ -100,50 +100,50 @@ export class OrigenDestinoComponent implements OnInit {
   }
   async cargarorigenes() {
     await this.post.getOrigen().subscribe(resp => {
-        this.origenes= resp.SDTOrigen;
-        this.cargardestinos();
-      });
+      this.origenes = resp.SDTOrigen;
+      this.cargardestinos();
+    });
   }
   async cargardestinos() {
     await this.post.getDestino().subscribe(resp => {
-        this.destinos= resp.SDTDestino;
-        setTimeout(async () => {
+      this.destinos = resp.SDTDestino;
+      setTimeout(async () => {
         //  this.elemento2.click();
-          if(this.viajes==false){
-            this.FormViaje.controls['origen'].setValue(' ');
-            this.FormViaje.controls['origen'].setValue('');
-            this.FormViaje.controls['destino'].setValue(' ');
-            this.FormViaje.controls['destino'].setValue('');
-            await this.local.hide();
-          }
-          if(this.viajes){
-            this.FormViaje.controls['origen'].setValue(' ');
-            this.FormViaje.controls['origen'].setValue('');
-            this.FormViaje.controls['destino'].setValue(' ');
-            this.FormViaje.controls['destino'].setValue('');
-            this.FormViaje.setValue(this.local.FormViaje);
-          }
-        }, 600);
+        if (this.viajes == false) {
+          this.FormViaje.controls['origen'].setValue(' ');
+          this.FormViaje.controls['origen'].setValue('');
+          this.FormViaje.controls['destino'].setValue(' ');
+          this.FormViaje.controls['destino'].setValue('');
+          await this.local.hide();
+        }
+        if (this.viajes) {
+          this.FormViaje.controls['origen'].setValue(' ');
+          this.FormViaje.controls['origen'].setValue('');
+          this.FormViaje.controls['destino'].setValue(' ');
+          this.FormViaje.controls['destino'].setValue('');
+          this.FormViaje.setValue(this.local.FormViaje);
+        }
+      }, 600);
     });
-    }
-  selecfechaSalida(){
-    this.FormViaje.controls['fecharegreso'].setValue('');
-    this.minimo= new Date(this.FormViaje.controls.fechasalida.value);
   }
-  buscarCorida(){
-    this.local.tipoviaje= this.activeLink;
+  selecfechaSalida() {
+    this.FormViaje.controls['fecharegreso'].setValue('');
+    this.minimo = new Date(this.FormViaje.controls.fechasalida.value);
+  }
+  buscarCorida() {
+    this.local.tipoviaje = this.activeLink;
     this.buscarviaje.emit(this.FormViaje);
   }
-  origenselec(){
-    for(let ori of this.origenes){
-      if(this.FormViaje.controls['origen'].value==ori.Nombre){
+  origenselec() {
+    for (let ori of this.origenes) {
+      if (this.FormViaje.controls['origen'].value == ori.Nombre) {
         this.FormViaje.controls['origencodigo'].setValue(ori.Origen);
       }
     }
   }
-  destinoselec(){
-    for(let ori of this.destinos){
-      if(this.FormViaje.controls['destino'].value==ori.Nombre){
+  destinoselec() {
+    for (let ori of this.destinos) {
+      if (this.FormViaje.controls['destino'].value == ori.Nombre) {
         this.FormViaje.controls['destinocodigo'].setValue(ori.Destino);
       }
     }

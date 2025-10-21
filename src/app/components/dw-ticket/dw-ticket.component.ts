@@ -89,7 +89,9 @@ export class DwTicketComponent implements OnInit {
           /* let win = window.open(resp.boleto_pdf, '_blank');
           //@ts-ignore
           win.focus();*/
-        }, error: () => {
+        }, error: async () => {
+          await this.local.hide();
+          this.generarpdf();
         }
       });
   }
@@ -294,7 +296,6 @@ export class DwTicketComponent implements OnInit {
       content: this.finales,
       styles: this.misestilos,
     };
-    await localStorage.clear();
     this.pdfObject = await pdfMake.createPdf(docDefinition);
     this.local.isloader = false;
     this.local.timer = false;
@@ -362,6 +363,8 @@ export class DwTicketComponent implements OnInit {
     };
     this.local.pasajeros = [];
     this.local.pasajerosregreso = [];
+    localStorage.removeItem('proceso');
+    localStorage.removeItem('ultiproceso');
   }
   async descargarBoletos() {
     this.local.IdTransaccion = '';

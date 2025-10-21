@@ -13,11 +13,16 @@
   font-style: normal;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-h5, h6, p {
+h5,
+h6,
+p {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -29,7 +34,7 @@ h5, h6, p {
   /*font-family: 'Franklin Gothic Regular', sans-serif;*/
   font-size: 1.1em;
   font-weight: 700;
-  color: #174A8C!important;
+  color: #174A8C !important;
 }
 
 .nav-tabs .nav-link {
@@ -46,8 +51,8 @@ h5, h6, p {
   color: #fff;
   /*background-color: #174A8C;*/
   border-color: transparent;
-  background: rgb(23,74,140);
-  background: linear-gradient(132deg, rgba(23,74,140,1) 0%, rgba(9,29,56,1) 100%);
+  background: rgb(23, 74, 140);
+  background: linear-gradient(132deg, rgba(23, 74, 140, 1) 0%, rgba(9, 29, 56, 1) 100%);
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
   font-size: 1rem;
@@ -57,135 +62,135 @@ h5, h6, p {
   color: #fff;
 }
 
-.text-justify{
+.text-justify {
   text-align: justify;
 }
 
 section {
-    padding: 2.7rem 0;
-  }
-  
-  .masthead {
-    height: 85vh;
-    min-height: 500px;
-    background-image: url("assets/img/hero_bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  .masthead .viaje-form {
-    margin-top: 15rem;
-    width: 100%;
-  }
-  
-
-  .masterhead-resultado{
-    height: 35vh;
-    min-height: 400px;
-    background-image: url("assets/img/bg_slider.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .oro-bg{
-    background-image: url("assets/img/oro_slider_01.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .zona-oro{
-    background-image: url("assets/img/oro_slider_01.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .masterhead-resultado .viaje-form {
-    margin-top: 6rem;
-  }
-
-  .logo-image {
-    width: 125px;
-    margin-top: 0;
-  }
-
-  .subheader-site {
-    padding: 8rem 0 3.5rem 0;
-    background-image: url("assets/img/bg_slider.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .subheader-site h3{
-    color: #fff;
-    padding: 2rem 0;
-  }
-
-  
-  .oro-blog {
-    min-height: 60vh;
-    background-size: cover;
-    /*background-image: url("https://images.unsplash.com/photo-1517216015940-049a2d4e2da4?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=14035a7d76df29c4697de036fcd005ce");*/
-    background-image: url('/assets/img/Oro_blog.jpg');
-  }
-  
-  .oro-informa .carousel-indicators {
-    bottom: -60px;
-  }
-  
-  .oro-informa .carousel-control-prev {
-    left: -60px;
-  }
-  
-  .oro-informa .carousel-control-next {
-    right: -60px;
-  }
-  
-.resultados .rounded-9 {
-    border-radius: 0.9rem!important;
+  padding: 2.7rem 0;
 }
 
-.resultados .oro-border-travel{
-    border: 1px dashed #174A8C;
+.masthead {
+  height: 85vh;
+  min-height: 500px;
+  background-image: url("assets/img/hero_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.masthead .viaje-form {
+  margin-top: 15rem;
+  width: 100%;
+}
+
+
+.masterhead-resultado {
+  height: 35vh;
+  min-height: 400px;
+  background-image: url("assets/img/bg_slider.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.oro-bg {
+  background-image: url("assets/img/oro_slider_01.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.zona-oro {
+  background-image: url("assets/img/oro_slider_01.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.masterhead-resultado .viaje-form {
+  margin-top: 6rem;
+}
+
+.logo-image {
+  width: 125px;
+  margin-top: 0;
+}
+
+.subheader-site {
+  padding: 8rem 0 3.5rem 0;
+  background-image: url("assets/img/bg_slider.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.subheader-site h3 {
+  color: #fff;
+  padding: 2rem 0;
+}
+
+
+.oro-blog {
+  min-height: 60vh;
+  background-size: cover;
+  /*background-image: url("https://images.unsplash.com/photo-1517216015940-049a2d4e2da4?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=14035a7d76df29c4697de036fcd005ce");*/
+  background-image: url('/assets/img/Oro_blog.jpg');
+}
+
+.oro-informa .carousel-indicators {
+  bottom: -60px;
+}
+
+.oro-informa .carousel-control-prev {
+  left: -60px;
+}
+
+.oro-informa .carousel-control-next {
+  right: -60px;
+}
+
+.resultados .rounded-9 {
+  border-radius: 0.9rem !important;
+}
+
+.resultados .oro-border-travel {
+  border: 1px dashed #174A8C;
 }
 
 .asientos .rounded-9 {
-    border-radius: 0.9rem!important;
+  border-radius: 0.9rem !important;
 }
 
-.asientos .oro-border-travel{
-    border: 1px dashed #174A8C;
+.asientos .oro-border-travel {
+  border: 1px dashed #174A8C;
 }
 
 
-.oro-servicios h4{
+.oro-servicios h4 {
   color: #0b2546;
 }
 
-.oro-servicios{
+.oro-servicios {
   background-image: url("assets/img/oro_slider_01.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.oro-serviciosinfo{
+.oro-serviciosinfo {
   padding: 6.5rem 0;
   background-image: url("assets/img/oro_bg_02.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.oro-contacto h4{
+.oro-contacto h4 {
   color: #0b2546;
 }
 
-.oro-card-bg{
+.oro-card-bg {
   background-image: url('assets/img/section-bg2.png');
   background-size: cover;
   background-position: center;
@@ -195,7 +200,7 @@ section {
   height: 450px;
 }
 
-.oro-card-bg-2{
+.oro-card-bg-2 {
   background-image: url('assets/img/section-bg2.png');
   background-size: cover;
   background-position: center;
@@ -205,25 +210,25 @@ section {
   height: 320px;
 }
 
-.oro-card-bg h4{
+.oro-card-bg h4 {
   color: #fff;
   font-weight: 600;
 }
 
-.oro-card-bg p{
+.oro-card-bg p {
   color: #fff;
 }
 
-.oro-card-bg-2 h4{
+.oro-card-bg-2 h4 {
   color: #fff;
   font-weight: 600;
 }
 
-.oro-card-bg-2 p{
+.oro-card-bg-2 p {
   color: #fff;
 }
 
-.oro-card-bg .btn-oro-2{
+.oro-card-bg .btn-oro-2 {
   color: #0b2546;
   border-color: transparent;
   background-color: #fff;
@@ -234,101 +239,121 @@ section {
   padding: .5rem 1rem;
 }
 
-footer{
-    background-color: #174A8C;
+footer {
+  background-color: #174A8C;
 }
 
-  footer .footer-container {
-    padding: 2.5rem;
-    
-  }
+footer .footer-container {
+  padding: 2.5rem;
 
-  footer .footer-copy{
-    border-top: solid 1px #fff;
-  }
-  
-  footer li {
-    padding: 0.35rem 0;
-  }
-  
-  footer a {
-    color: inherit;
-    text-decoration: none;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-    padding: 0.8rem 0;
-  }
-  
-  footer a:hover, footer a:focus {
-    text-decoration: none;
-  }
-
-  footer .social-icons li {
-    display: inline;
-    padding: .8em; 
 }
-footer .social-icons li a{
-    display:inline-block;
-    border-radius: 50%;
-    text-align: center;
-    width: 50px;
-    height: 50px;
-    font-size: 1.1rem;
-    background-color: #fff;
-    transition: 0.4s;
- }
- footer .social-icon i{
-    color: #174A8C;
-    line-height: 1.1rem;
- }
 
- footer .social-icons li a:hover{
-    background-color: #103362;
- }
- footer .social-icon i:hover{
-    color: #fff;
- }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+footer .footer-copy {
+  border-top: solid 1px #fff;
+}
+
+footer li {
+  padding: 0.35rem 0;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  padding: 0.8rem 0;
+}
+
+footer a:hover,
+footer a:focus {
+  text-decoration: none;
+}
+
+footer .social-icons li {
+  display: inline;
+  padding: .8em;
+}
+
+footer .social-icons li a {
+  display: inline-block;
+  border-radius: 50%;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  font-size: 1.1rem;
+  background-color: #fff;
+  transition: 0.4s;
+}
+
+footer .social-icon i {
+  color: #174A8C;
+  line-height: 1.1rem;
+}
+
+footer .social-icons li a:hover {
+  background-color: #103362;
+}
+
+footer .social-icon i:hover {
+  color: #fff;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /*CLASES ALEXIS */
-.overlay{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background-color:#1033627a;
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #1033627a;
   z-index: 1032 !important;
-  display:flex;
-  align-items:center;
-  justify-content:center;
- }
- .no-margin{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-margin {
   margin: 0px 0px 0px 0px;
 }
 
 
 
-.terminales .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+.terminales .nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
   color: #fff;
   background-color: #174A8C;
 }
 
-.mapas-scroll{
+.mapas-scroll {
   width: 580px;
   height: 600px;
   margin-bottom: 60px;
   overflow-y: scroll;
 }
 
-.vacantes .text-vacantes{ padding-left: 2.5rem;}
+.vacantes .text-vacantes {
+  padding-left: 2.5rem;
+}
 
 /* Móviles en horizontal o tablets en vertical
    ------------------------------------------------------------------------- */
-@media (max-width: 767px) {  
+@media (max-width: 767px) {
 
-  .masthead {height: 90vh;}
+  .masthead {
+    height: 90vh;
+  }
 
-  .row-finder{padding-left: 1rem;}
+  .row-finder {
+    padding-left: 1rem;
+  }
 
   .masthead .viaje-form {
     margin-top: 6rem;
@@ -339,16 +364,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 480px;
     margin-bottom: 2.5rem;
   }
-  
+
 }
 
 /* Móviles en vertical
    ------------------------------------------------------------------------- */
 @media (max-width: 480px) {
-  
-  .masthead {height: 95vh;}
 
-  .row-finder{padding-left: 1rem;}
+  .masthead {
+    height: 95vh;
+  }
+
+  .row-finder {
+    padding-left: 1rem;
+  }
 
   .masthead .viaje-form {
     margin-top: 6rem;
@@ -359,9 +388,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 95vh;
   }
 
-  .resultados .card h3{font-size: .95rem;}
+  .resultados .card h3 {
+    font-size: .95rem;
+  }
 
-  .resultados .card h6{font-size: .55rem;}
+  .resultados .card h6 {
+    font-size: .55rem;
+  }
 
   .oro-informa .carousel-control-next {
     right: 0px;
@@ -376,9 +409,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-bottom: 2.5rem;
   }
 
-  .vacantes .text-vacantes{ padding-left: 1rem; margin-top: 2rem;}
+  .vacantes .text-vacantes {
+    padding-left: 1rem;
+    margin-top: 2rem;
+  }
 
-  .oro-contacto .lead {font-size: 1.1rem;}
+  .oro-contacto .lead {
+    font-size: 1.1rem;
+  }
 
   .mapas-scroll {
     width: 350px;
@@ -387,23 +425,64 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     overflow-y: scroll;
   }
 
-  .venta-pago .pago-tarjeta{ padding-top: 2rem; }
+  .venta-pago .pago-tarjeta {
+    padding-top: 2rem;
+  }
 
-  .elpadding{padding-right: 1rem;}
+  .elpadding {
+    padding-right: 1rem;
+  }
 
 }
 
 
- .no-padding{
+.no-padding {
   padding: 0px 0px 0px 0px;
 }
 
-.img-tipo{
+.img-tipo {
   width: 40%;
 }
-.img-plus{
+
+.img-plus {
   width: 15%;
 }
-.payment-checkout-modal{
+
+.payment-checkout-modal {
   z-index: 1031 !important;
+}
+
+.cdk-overlay-container {
+  z-index: 1030 !important;
+}
+
+::ng-deep .responsive-modal .mat-dialog-container {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+::ng-deep .responsive-modal .mat-dialog-content {
+  flex: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  ::ng-deep .responsive-modal {
+    width: 95vw !important;
+    height: 95vh !important;
+    max-width: 95vw !important;
+    max-height: 95vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  ::ng-deep .responsive-modal {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+  }
 }
