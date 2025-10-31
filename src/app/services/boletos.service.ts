@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Restpagados } from '../interfaces/autobus';
-import { Respuesta, RespuestaConfirmacion, Restligapago } from '../interfaces/intstripe';
+import { Mitresponse, Respuesta, RespuestaConfirmacion, Restligapago } from '../interfaces/intstripe';
 
 const url = environment.url;
 const apikey = environment.apikey;
@@ -68,5 +68,9 @@ export class BoletosService {
     // /api/get-genera-liga    
     return this.http.post<Restligapago>(`${url}get-genera-liga`, data);
 
+  }
+  getStatusTransaccion(IdTransaccion: string) {
+    // /api/get-status-pago
+    return this.http.post<Mitresponse>(`${url}get-status-pago`, { IdTransaccion });
   }
 }

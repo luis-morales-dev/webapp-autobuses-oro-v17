@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class SocketService {
   public connect(): Subject<any> {
     if (!this.subject) {
       //this.subject = this.create(`wss://api.lerco.agency:8080/payments`);
-      this.subject = this.create(`wss://api.lerco.agency/websocket/`);
+      this.subject = this.create(`wss://api-oro.lercomx.com/websocket/`);
     }
     return this.subject;
   }

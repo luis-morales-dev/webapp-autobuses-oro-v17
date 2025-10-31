@@ -5,10 +5,10 @@
 export const environment = {
   production: false,
   //url nuevo produccion
-  //url:'https://api-oro.lercomx.com/web/api/',
+  url: 'https://api-oro.lercomx.com/web/api/',
   //ulr Producción
   //url:'https://api-oro.lerco.agency/web/api/',
-  url: 'https://api.lerco.agency/web/api/',
+  // url: 'https://api.lerco.agency/web/api/',
   apikey: 'TO41Jtmq+rph97My/XLTYQ==',
   //Credenciales de produccion HSBC
   client_app_code: 'VCM-OROTOUR-MXN-SERVER',

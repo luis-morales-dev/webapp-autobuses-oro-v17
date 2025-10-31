@@ -38,6 +38,8 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
   bandera: boolean = true;
   total: number = 0;
   liga_pago: string = '';
+  private consultaInterval: any;
+
 
   constructor(public local: LocalService,
     private boletos: BoletosService,
@@ -84,6 +86,7 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error('Error en WebSocket:', error);
+
       },
       complete: () => {
         console.log('Conexión WebSocket cerrada');
@@ -92,10 +95,6 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
   }
   async enviarventa(tipocard: any) {
     this.banderfin = true;
-    if (!this.socketService.isConnected()) {
-      this.modalerror();
-      return;
-    }
     if (this.local.fecha_99 != '') {
       this.opencheckout();
       return;
@@ -191,6 +190,11 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
     });
   }
   abrirModal(url: string): void {
+    if (!this.socketService.isConnected()) {
+      this.consultaInterval = setInterval(() => {
+        this.consultamanual();
+      }, 30000);
+    }
     const dialogRef = this.dialog.open(ModalPagoComponent, {
       width: '600px',
       height: '700px',
@@ -201,11 +205,13 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.banderfin = false;
+      this.stopConsultaInterval();
     });
   }
   async saveresponsehsbc(response: RestStatusPago) {
     if (response.status == 'denied') {
       this.liga_pago = '';
+      this.stopConsultaInterval();
       this.poperror(response.message || 'Transacción no aprobada por el banco emisor.');
 
       return;
@@ -216,6 +222,7 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
     }
     if (response.status == 'approved') {
       this.bandera = false;
+      this.stopConsultaInterval();
       this.confirmartransaccion(response.card_type_code);
     } else {
       this.modalerror();
@@ -265,12 +272,30 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
   private removeBeforeUnloadListener(): void {
     window.removeEventListener('beforeunload', this.beforeUnloadHandler);
   }
+  consultamanual() {
+    this.boletos.getStatusTransaccion(this.local.IdTransaccion).subscribe({
+      next: (resp) => {
+        if (resp.action == 'payment_update' && resp['payment_reference'] == this.local.IdTransaccion && resp.data.status != null) {
+          this.dialog.closeAll();
+          this.saveresponsehsbc(resp.data);
+        }
+      },
+      error: () => {
+        this.modalerror();
+      }
+    });
+  }
+  private stopConsultaInterval(): void {
+    if (this.consultaInterval) {
+      clearInterval(this.consultaInterval);
+      this.consultaInterval = null;
+    }
+  }
 
   ngOnDestroy() {
-    this.removeBeforeUnloadListener(); // Limpiar al destruir el componente
+    this.removeBeforeUnloadListener();
     this.socketService.disconnect();
     this.dialog.closeAll();
-    //localStorage.setItem('proceso', '4');
-    //localStorage.setItem('ultiproceso', '3');
+    this.stopConsultaInterval();
   }
 }

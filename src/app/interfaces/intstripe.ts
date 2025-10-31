@@ -35,9 +35,15 @@ export interface RestStatusPago {
     status: string;
     reference: string;
     amount: string;
-    message: string;
-    timestamp: string;
+    message?: string;
+    type_card: string;
     card_type_code: string;
-    payment_id: null;
+    folio: string;
+    timestamp: Date;
+    payment_id: string;
 }
-
+export interface Mitresponse {
+    action: string;
+    payment_reference: string;
+    data: RestStatusPago;
+}

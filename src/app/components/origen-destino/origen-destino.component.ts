@@ -21,7 +21,7 @@ export class OrigenDestinoComponent implements OnInit {
   @Output() buscarviaje = new EventEmitter<FormGroup>();
   date: Date = new Date();
   minimo: Date = new Date();
-  fecha_final: Date = new Date('2025-11-01');
+  fecha_final: Date = new Date('2025-12-01');
   elemento2: any;
   activeLink: string = 'Viaje Sencillo';
   activeindex: number = 0;
