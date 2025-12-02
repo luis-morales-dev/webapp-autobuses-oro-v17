@@ -190,11 +190,9 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
     });
   }
   abrirModal(url: string): void {
-    if (!this.socketService.isConnected()) {
-      this.consultaInterval = setInterval(() => {
-        this.consultamanual();
-      }, 30000);
-    }
+    this.consultaInterval = setInterval(() => {
+      this.consultamanual();
+    }, 30000);
     const dialogRef = this.dialog.open(ModalPagoComponent, {
       width: '600px',
       height: '700px',
@@ -205,7 +203,6 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.banderfin = false;
-      this.stopConsultaInterval();
     });
   }
   async saveresponsehsbc(response: RestStatusPago) {
@@ -217,6 +214,7 @@ export class VentaPagoComponent implements OnInit, OnDestroy {
       return;
     }
     if (response.status == 'error') {
+      this.stopConsultaInterval();
       this.modalerror();
       return;
     }
